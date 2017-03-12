@@ -1,0 +1,49 @@
+@function boxsha($num, $count) {
+  $str: '';
+  @while $num > 0 {
+    $w: random($count);
+    $h: random($count);
+    @if  $num == 1 {
+      $str: $str + $w+'px '+$h+'px '+'#fff';
+    }  @else {
+      $str: $str + $w+'px '+$h+'px '+'#fff, ';
+    }
+    $num: $num - 1;
+  }
+  @return $str;
+}
+.start {
+  width: 400px;
+  height: 400px;
+  background: #000;
+  position: relative;
+  @each $index in (1, 2 , 3) {
+    .start#{$index} {
+      background-color: transparent;
+      position: absolute;
+      width: unquote($index + 'px');
+      height: unquote($index + 'px');
+      border-radius: 50%;
+      box-shadow: unquote(boxsha(1 / $index * 100, 400));
+      animation: starAnimation 30s linear infinite;
+      &:after {
+        content: "";
+        display: block;
+        top: 400px;
+        position: absolute;
+        width: unquote($index + 'px');
+        height: unquote($index + 'px');
+        border-radius: 50%;
+        box-shadow: unquote(boxsha(1 / $index * 100, 400));
+      }
+    }
+  }
+}
+@keyframes starAnimation{
+  0% {
+    transform:translateY(0)
+  }
+  to {
+    transform:translateY(-400px)
+  }
+}

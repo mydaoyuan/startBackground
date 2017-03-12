@@ -1,0 +1,197 @@
+// // // 函数 先声明 在使用
+// // @function getStart($num, $px) {
+// //     $pos: 20;
+// //     $re: 0;
+// //     @while $num >0 {
+// //       $re: $re + 2;
+// //       $num: $num - 2;
+// //     }
+// //     @return $re;
+// // }
+// //
+// // @function getwidth($num) {
+// //   @return $num*2;
+// // }
+// //
+// // .start  {
+// //   width: 400px;
+// //   height: 400px;
+// //   margin: auto;
+// //   background-color: #000;
+// //   .start1 {
+// //     width: getStart(20, 2);
+// //   }
+// //   .start2 {
+// //     width: getwidth(20px)
+// //   }
+// // }
+// // $my: #123;
+// // $str: top;
+// // .my {
+// //   color: $my;
+// //   .my-1 {
+// //     $my: #333;
+// //     color: $my;
+// //     .my-2 {
+// //       color: $my;
+// //     }
+// //     $my: #666;
+// //     border-color: $my;
+// //     border-#{$str}-color: #000;
+// //   }
+// // }
+// // $my: #222;
+// // .myafter {
+// //   color: $my;
+// //   $w : 7px;
+// //   $h : 10px;
+// //   &:before {
+// //     content: 'foo' + bazr;
+// //     width: $h - $w;
+// //   }
+// // }
+// //  #admin a {
+// //   font-weight: bold;
+// // }
+// // .fakelink {
+// //   @extend #admin;
+// // }
+// // #context a %extreme {
+// //   color: blue;
+// //   font-weight: bold;
+// //   font-size: 2em;
+// // }
+// // .notice {
+// //   @extend %extreme;
+// // }
+// // #context .title .notice2 {
+// //   @extend %extreme;
+// // }
+// //
+// // @mixin red-text {
+// //   color: #ff0000;
+// // }
+// // @mixin font($color, $fontSize: 14px) {
+// //     color: $color;
+// //     font-size: $fontSize;
+// // }
+// // .a {
+// //   @include red-text;
+// //   @include font($fontSize: 12px, $color: #bbb)
+// // }
+// // $i: 6;
+// // @while $i > 0 {
+// //   .item-#{$i} { width: 2em * $i; }
+// //   $i: $i - 2;
+// // }
+// //
+// // @each $animal in puma, sea-slug, egret, salamander, my-name {
+// //   .#{$animal}-icon {
+// //     background-image: url('/images/#{$animal}.png');
+// //   }
+// // }
+// // $arr: (298, 252, 11, 203, 7, 343, 220, 27, 288, 1, 294, 355, 359, 21, 150, 213, 321, 36, 17, 212);
+// $w: 400px;
+// $h: 400px;
+// .start {
+//   width: $w;
+//   height: $h;
+//   background: #000;
+//   position: relative;
+// }
+// // $str: '';
+// // $length: length($arr);
+// // $mycount: 0;
+// // @each $num in $arr {
+// //   $mycount: $mycount + 1;
+// //   @if $mycount == $length {
+// //     $str: $str + $num+'px '+$num+'px '+'#fff;';
+// //   } @else {
+// //     $str: $str + $num+'px '+$num+'px '+'#fff, ';
+// //   }
+// // }
+// //
+// //
+// // @function getlist($num: 20) {
+// //   $list: ();
+// //   $num: 20;
+// //   @while $num > 0 {
+// //     $w: random(400);
+// //     $h: random(400);
+// //     $ache: ($w, $h);
+// //     $list: append($list, $ache);
+// //     // .item-#{$num} { width: 2em * $num; };
+// //     $num: $num -1;
+// //   }
+// //   @return $list;
+// // }
+// //
+//
+// @function boxsha($list) {
+//   $str: '';
+//   $length: length($list);
+//   $mycount: 0;
+//   @each $one in $list {
+//     $mycount: $mycount + 1;
+//     @each $w, $h in $one {
+//       @if $mycount == $length {
+//         $str: $str + $w+'px '+$h+'px '+'#fff';
+//       } @else {
+//         $str: $str + $w+'px '+$h+'px '+'#fff, ' + $mycount;
+//       }
+//     }
+//   }
+//   @return $str;
+// }
+//
+//
+// $list: ();
+// $num: 6;
+// @while $num > 0 {
+//   $w: random(400);
+//   $h: random(400);
+//   $ache: ($num: ($w, $h));
+//   $list: map-merge($list, $ache);
+//   $num: $num - 1;
+// }
+//
+// // @function test($map) {
+// //       $str: ‘’;
+// //       $keys: map-keys($map);
+// //       $length: length($keys) + 1;
+// //       $mylength: 1;
+// //       @each $key in $keys {
+// //         $onece: map-get($map, $key);
+// //         $mylength: $mylength + 1;
+// //         @each $w, $h in $onece {
+// //           $bu: $mylength==$length;
+// //           $str: $str + $onece + 'key, xian   ';
+// //         }
+// //         // @if ($mylength == $length){
+// //         //   $str:  + $str;
+// //         // } @else {
+// //         //   $str: map-get($map, $key) + $str;
+// //         // }
+// //       }
+// //       @return $str;
+// // }
+// //
+// // .start1 {
+// //   position: absolute;
+// //   width: 10px;
+// //   height: 10px;
+// //   // box-shadow: unquote(boxsha($list()));
+// //   background-color: #fff;
+// //   // @include test($list);
+// //   content: test($list);
+// // }
+//
+// $width: 0;
+//   // @each $w,$h in (12, 14) {
+//   //   $height: 0;
+//   //   $width: $w + $width;
+//   //   // $height: $h + $height;
+//   // }
+// .satrt2{
+//   content: $width;
+// }
