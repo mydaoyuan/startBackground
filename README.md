@@ -1,5 +1,6 @@
 # startBackground
-use sass make startBackground
+
+使用sass函数生成box-shadow的星空背景
 
 demo: [demo](https://mydaoyuan.github.io/startBackground/)
 
